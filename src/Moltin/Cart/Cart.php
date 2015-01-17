@@ -60,6 +60,18 @@ class Cart
         $this->store->setIdentifier($this->id);
     }
 
+    public function applyDiscount($discountCode, $discountFactor)
+    {
+        foreach ($this->contents() as $item) {
+            $item->update([
+                'discounted' => true,
+                'discounted_price' => round($item->price * $discountFactor, 2, PHP_ROUND_HALF_DOWN),
+                'discount_code' => $discountCode,
+                'discount_factor' => $discountFactor
+            ]);
+        }
+    }
+
     /**
      * Retrieve the cart contents
      * 
@@ -223,7 +235,7 @@ class Cart
 
     /**
      * The total value of the cart without tax
-     * 
+     *
      * @return float The total cart value
      */
     public function totalWithoutTax()
