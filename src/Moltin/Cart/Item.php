@@ -105,7 +105,10 @@ class Item
      */
     public function total($includeTax = true)
     {
-        $price = $this->price;
+        if($this->discounted)
+            $price = $this->discounted_price;
+        else
+            $price = $this->price;
 
         if ($includeTax) $price = $this->tax->add($price);
 
