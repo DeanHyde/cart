@@ -235,7 +235,7 @@ class Cart
 
     /**
      * The total value of the cart without tax
-     * 
+     *
      * @return float The total cart value
      */
     public function totalWithoutTax()
