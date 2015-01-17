@@ -73,6 +73,23 @@ class Cart
         }
     }
 
+    public function getDiscountInfo()
+    {
+        foreach ($this->contents() as $item)
+        {
+            if($item->discounted)
+                return [
+                    'discount_id' => $item->discount_id,
+                    'discounted' => $item->discounted,
+                    'discounted_price' => $item->discounted_price,
+                    'discount_code' => $item->discount_code,
+                    'discount_factor' => $item->discount_factor,
+                ];
+
+            return;
+        }
+    }
+
     /**
      * Retrieve the cart contents
      * 
